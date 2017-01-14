@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "webpack-dev-server --config webpack.config.babel.js",
+		"build": "webpack --config webpack.config.babel.js",
 		"test": "tape */tests/**/*.js"
 	},
 	"author": "",

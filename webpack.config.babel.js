@@ -3,7 +3,7 @@ import path from 'path';
 module.exports = {
 	entry: './examples/js/index.js',
 	output: {
-		filename: 'bundle.js'
+		filename: 'dist/bundle.js'
 	},
 	module: {
 		preLoaders: [
