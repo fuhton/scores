@@ -21502,7 +21502,7 @@
 		return _react2.default.createElement(
 			'div',
 			null,
-			_react2.default.createElement(_Score2.default, { styles: styles, width: styles.width, data: _data2.default })
+			_react2.default.createElement(_Score2.default, { styles: styles, data: _data2.default })
 		);
 	};
 
@@ -21524,13 +21524,11 @@
 
 	var _glamor = __webpack_require__(180);
 
-	var _parse = __webpack_require__(189);
+	var _Measure = __webpack_require__(189);
 
-	var _Measure = __webpack_require__(190);
+	var _BarLine = __webpack_require__(192);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 	var defaultStyles = {
 		display: 'block',
@@ -21541,24 +21539,20 @@
 	var Score = function Score(_ref) {
 		var _ref$styles = _ref.styles,
 		    styles = _ref$styles === undefined ? {} : _ref$styles,
-		    _ref$width = _ref.width,
-		    width = _ref$width === undefined ? '15px' : _ref$width,
 		    _ref$data = _ref.data,
 		    data = _ref$data === undefined ? {} : _ref$data;
-
-		var amount = Array.apply(undefined, _toConsumableArray(Array((0, _parse.parsePx)(width, '15px'))));
 		return _react2.default.createElement(
 			'div',
 			(0, _glamor.css)(Object.assign({}, styles, defaultStyles)),
-			amount.map(function (object, i) {
-				return _react2.default.createElement(_Measure.Measure, { key: i, measure: data.measures[i] });
+			_react2.default.createElement(_BarLine.BarLine, null),
+			data.measures.map(function (object, i) {
+				return _react2.default.createElement(_Measure.Measure, { key: i, measure: object });
 			})
 		);
 	};
 
 	Score.propTypes = {
 		styles: _react.PropTypes.object.isRequired,
-		width: _react.PropTypes.string.isRequired,
 		data: _react.PropTypes.object.isRequired
 	};
 
@@ -23680,21 +23674,6 @@
 
 /***/ },
 /* 189 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	var parsePx = exports.parsePx = function parsePx(px, val) {
-		return Math.round(parseInt(px.replace('px'), 10) / parseInt(val.replace('px'), 10));
-	};
-
-	exports.default = parsePx;
-
-/***/ },
-/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23704,13 +23683,17 @@
 	});
 	exports.Measure = undefined;
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	var _glamor = __webpack_require__(180);
 
-	var _Staff = __webpack_require__(191);
+	var _Staff = __webpack_require__(190);
+
+	var _BarLine = __webpack_require__(192);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23718,28 +23701,39 @@
 		display: 'inline-block'
 	};
 
+	var bottomStyles = {
+		marginTop: '25px'
+	};
+
 	var Measure = exports.Measure = function Measure(_ref) {
 		var _ref$measure = _ref.measure,
-		    measure = _ref$measure === undefined ? {
+		    measure = _ref$measure === undefined ? [{
 			treble: '',
 			bass: ''
-		} : _ref$measure;
+		}] : _ref$measure;
 		return _react2.default.createElement(
 			'div',
 			(0, _glamor.css)(defaultStyles),
-			_react2.default.createElement(_Staff.Staff, { data: measure.treble }),
-			_react2.default.createElement(_Staff.Staff, { data: measure.bass })
+			measure.map(function (object, i) {
+				return _react2.default.createElement(
+					'div',
+					_extends({ key: i }, (0, _glamor.css)(defaultStyles)),
+					_react2.default.createElement(_Staff.Staff, { data: object.treble }),
+					_react2.default.createElement(_Staff.Staff, { styles: bottomStyles, data: object.bass })
+				);
+			}),
+			_react2.default.createElement(_BarLine.BarLine, null)
 		);
 	};
 
 	Measure.propTypes = {
-		measure: _react.PropTypes.object
+		measure: _react.PropTypes.arrayOf(_react.PropTypes.object)
 	};
 
 	exports.default = Measure;
 
 /***/ },
-/* 191 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23755,20 +23749,25 @@
 
 	var _glamor = __webpack_require__(180);
 
-	var _Bar = __webpack_require__(192);
+	var _Bar = __webpack_require__(191);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var styles = {
+	var defaultStyles = {
 		display: 'block',
-		width: '15px',
-		marginBottom: '25px'
+		width: '15px'
 	};
 
-	var Staff = exports.Staff = function Staff() {
+	var Staff = exports.Staff = function Staff(_ref) {
+		var _ref$styles = _ref.styles,
+		    styles = _ref$styles === undefined ? {} : _ref$styles,
+		    _ref$data = _ref.data,
+		    data = _ref$data === undefined ? {} : _ref$data;
+
+		console.log(data);
 		return _react2.default.createElement(
 			'div',
-			(0, _glamor.css)(styles),
+			(0, _glamor.css)(Object.assign({}, styles, defaultStyles)),
 			_react2.default.createElement(_Bar.Bar, null),
 			_react2.default.createElement(_Bar.Bar, null),
 			_react2.default.createElement(_Bar.Bar, null),
@@ -23777,10 +23776,15 @@
 		);
 	};
 
+	Staff.propTypes = {
+		styles: _react.PropTypes.object,
+		data: _react.PropTypes.arrayOf(_react.PropTypes.object)
+	};
+
 	exports.default = Staff;
 
 /***/ },
-/* 192 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23812,24 +23816,86 @@
 	exports.default = Bar;
 
 /***/ },
+/* 192 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.BarLine = undefined;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _glamor = __webpack_require__(180);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var defaultStyles = {
+		display: 'inline-block',
+		borderRight: '1px solid black',
+		height: '125px'
+	};
+
+	var BarLine = exports.BarLine = function BarLine() {
+		return _react2.default.createElement('div', _extends({ className: 'measureEnd' }, (0, _glamor.css)(defaultStyles)));
+	};
+
+	exports.default = BarLine;
+
+/***/ },
 /* 193 */
 /***/ function(module, exports) {
 
 	module.exports = {
 		"time": "4/4",
 		"measures": [
-			{
-				"treble": {},
-				"bass": {}
-			},
-			{
-				"treble": {},
-				"bass": {}
-			},
-			{
-				"treble": {},
-				"bass": {}
-			}
+			[
+				{
+					"treble": [
+						{
+							"note": "c4",
+							"duration": "1"
+						},
+						{
+							"note": "d4",
+							"duration": "1"
+						},
+						{
+							"note": "e4",
+							"duration": "1"
+						},
+						{
+							"note": "f4",
+							"duration": "1"
+						}
+					],
+					"bass": []
+				},
+				{
+					"treble": [],
+					"bass": []
+				},
+				{
+					"treble": [],
+					"bass": []
+				}
+			],
+			[
+				{
+					"treble": [],
+					"bass": []
+				},
+				{
+					"treble": [],
+					"bass": []
+				}
+			]
 		]
 	};
 
