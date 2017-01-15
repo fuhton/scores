@@ -9,7 +9,7 @@ const styles = {
 
 const App = () => (
 	<div>
-		<Score styles={styles} width={styles.width} data={data} />
+		<Score styles={styles} data={data} />
 	</div>
 );
 

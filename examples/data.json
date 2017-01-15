@@ -1,17 +1,46 @@
 {
 	"time": "4/4",
 	"measures": [
-		{
-			"treble": {},
-			"bass": {}
-		},
-		{
-			"treble": {},
-			"bass": {}
-		},
-		{
-			"treble": {},
-			"bass": {}
-		}
+		[
+			{
+				"treble": [
+					{
+						"note": "c4",
+						"duration": "1"
+					},
+					{
+						"note": "d4",
+						"duration": "1"
+					},
+					{
+						"note": "e4",
+						"duration": "1"
+					},
+					{
+						"note": "f4",
+						"duration": "1"
+					}
+				],
+				"bass": []
+			},
+			{
+				"treble": [],
+				"bass": []
+			},
+			{
+				"treble": [],
+				"bass": []
+			}
+		],
+		[
+			{
+				"treble": [],
+				"bass": []
+			},
+			{
+				"treble": [],
+				"bass": []
+			}
+		]
 	]
 }
