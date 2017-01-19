@@ -21487,14 +21487,13 @@
 
 	var _Score2 = _interopRequireDefault(_Score);
 
-	var _data = __webpack_require__(193);
+	var _data = __webpack_require__(195);
 
 	var _data2 = _interopRequireDefault(_data);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var styles = {
-		width: '200px',
 		margin: '0 auto'
 	};
 
@@ -21526,7 +21525,7 @@
 
 	var _Measure = __webpack_require__(189);
 
-	var _BarLine = __webpack_require__(192);
+	var _BarLine = __webpack_require__(194);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23693,7 +23692,7 @@
 
 	var _Staff = __webpack_require__(190);
 
-	var _BarLine = __webpack_require__(192);
+	var _BarLine = __webpack_require__(194);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23743,6 +23742,8 @@
 	});
 	exports.Staff = undefined;
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -23751,28 +23752,44 @@
 
 	var _Bar = __webpack_require__(191);
 
+	var _Note = __webpack_require__(192);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var defaultStyles = {
-		display: 'block',
+	var defaultStyles = {};
+	/*
+		display: 'inline-block',
+		position: 'relative',
+	};*/
+
+	var noteStyles = {
+		display: 'inline-block',
+		position: 'relative',
 		width: '15px'
 	};
 
+	// Staff is equal to ONE duration. Notes should have their duration value
+	// checked, and if they exceed ONE duration, stop mapping
 	var Staff = exports.Staff = function Staff(_ref) {
 		var _ref$styles = _ref.styles,
 		    styles = _ref$styles === undefined ? {} : _ref$styles,
 		    _ref$data = _ref.data,
 		    data = _ref$data === undefined ? {} : _ref$data;
-
-		console.log(data);
 		return _react2.default.createElement(
 			'div',
 			(0, _glamor.css)(Object.assign({}, styles, defaultStyles)),
-			_react2.default.createElement(_Bar.Bar, null),
-			_react2.default.createElement(_Bar.Bar, null),
-			_react2.default.createElement(_Bar.Bar, null),
-			_react2.default.createElement(_Bar.Bar, null),
-			_react2.default.createElement(_Bar.Bar, null)
+			data.map(function (el, i) {
+				return _react2.default.createElement(
+					'div',
+					_extends({ key: i }, (0, _glamor.css)(noteStyles)),
+					_react2.default.createElement(_Bar.Bar, null),
+					_react2.default.createElement(_Bar.Bar, null),
+					_react2.default.createElement(_Bar.Bar, null),
+					_react2.default.createElement(_Bar.Bar, null),
+					_react2.default.createElement(_Bar.Bar, null),
+					_react2.default.createElement(_Note.Note, { note: el.note })
+				);
+			})
 		);
 	};
 
@@ -23824,6 +23841,73 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	exports.Note = undefined;
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _glamor = __webpack_require__(180);
+
+	var _notes = __webpack_require__(193);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var styles = {
+		border: '1px solid black',
+		borderRadius: '50px',
+		height: '8px',
+		width: '8px',
+		background: 'black',
+		position: 'absolute',
+		left: '3px'
+	};
+
+	var Note = exports.Note = function Note(_ref) {
+		var _ref$note = _ref.note,
+		    note = _ref$note === undefined ? '' : _ref$note;
+
+		styles.top = _notes.Treble[note];
+		return _react2.default.createElement('div', (0, _glamor.css)(styles));
+	};
+
+	Note.propTypes = {
+		note: _react.PropTypes.string.isRequired
+	};
+
+	exports.default = Note;
+
+/***/ },
+/* 193 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var Treble = exports.Treble = {
+		g5: '-55px',
+		f5: '-49.5px',
+		e5: '-44px',
+		d5: '20.5px',
+		c5: '24.5px',
+		b5: '28.5px',
+		a5: '32.5px',
+		g4: '38.5px'
+	};
+
+	exports.default = Treble;
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	exports.BarLine = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -23849,7 +23933,7 @@
 	exports.default = BarLine;
 
 /***/ },
-/* 193 */
+/* 195 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -23859,23 +23943,40 @@
 				{
 					"treble": [
 						{
-							"note": "c4",
+							"note": "g4",
 							"duration": "1"
 						},
 						{
-							"note": "d4",
+							"note": "a5",
 							"duration": "1"
 						},
 						{
-							"note": "e4",
+							"note": "b5",
 							"duration": "1"
 						},
 						{
-							"note": "f4",
+							"note": "c5",
 							"duration": "1"
 						}
 					],
-					"bass": []
+					"bass": [
+						{
+							"note": "g2",
+							"duration": "1"
+						},
+						{
+							"note": "a3",
+							"duration": "1"
+						},
+						{
+							"note": "b3",
+							"duration": "1"
+						},
+						{
+							"note": "c3",
+							"duration": "1"
+						}
+					]
 				},
 				{
 					"treble": [],

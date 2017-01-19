@@ -3,7 +3,6 @@ import Score from '../../lib/components/Score';
 import data from '../data.json';
 
 const styles = {
-	width: '200px',
 	margin: '0 auto',
 };
 

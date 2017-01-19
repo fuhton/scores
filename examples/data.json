@@ -5,23 +5,40 @@
 			{
 				"treble": [
 					{
-						"note": "c4",
+						"note": "g4",
 						"duration": "1"
 					},
 					{
-						"note": "d4",
+						"note": "a5",
 						"duration": "1"
 					},
 					{
-						"note": "e4",
+						"note": "b5",
 						"duration": "1"
 					},
 					{
-						"note": "f4",
+						"note": "c5",
 						"duration": "1"
 					}
 				],
-				"bass": []
+				"bass": [
+					{
+						"note": "g2",
+						"duration": "1"
+					},
+					{
+						"note": "a3",
+						"duration": "1"
+					},
+					{
+						"note": "b3",
+						"duration": "1"
+					},
+					{
+						"note": "c3",
+						"duration": "1"
+					}
+				]
 			},
 			{
 				"treble": [],
