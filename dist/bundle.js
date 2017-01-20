@@ -21517,6 +21517,8 @@
 		value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -21524,6 +21526,8 @@
 	var _glamor = __webpack_require__(180);
 
 	var _Measure = __webpack_require__(189);
+
+	var _Measure2 = _interopRequireDefault(_Measure);
 
 	var _BarLine = __webpack_require__(194);
 
@@ -21542,10 +21546,10 @@
 		    data = _ref$data === undefined ? {} : _ref$data;
 		return _react2.default.createElement(
 			'div',
-			(0, _glamor.css)(Object.assign({}, styles, defaultStyles)),
+			_extends({ className: 'Score' }, (0, _glamor.css)(Object.assign({}, styles, defaultStyles))),
 			_react2.default.createElement(_BarLine.BarLine, null),
 			data.measures.map(function (object, i) {
-				return _react2.default.createElement(_Measure.Measure, { key: i, measure: object });
+				return _react2.default.createElement(_Measure2.default, { key: i, measure: object });
 			})
 		);
 	};
@@ -23680,9 +23684,10 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.Measure = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -23696,6 +23701,47 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* import React, { PropTypes } from 'react';
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               import { css } from 'glamor';
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               import { Staff } from './Staff';
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               import { BarLine } from './BarLine';
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               const defaultStyles = {
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	display: 'inline-block',
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               };
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               const bottomStyles = {
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	marginTop: '25px',
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               };
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               export const Measure = ({
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	measure = [{
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		treble: '',
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		bass: '',
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	}],
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               }) => (
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	<div {...css(defaultStyles)}>
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		{measure.map((object, i) =>
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               			<div key={i} {...css(defaultStyles)}>
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               				<Staff data={object.treble} />
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               				<Staff styles={bottomStyles} data={object.bass} />
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               			</div>,
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		)}
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		<BarLine />
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	</div>
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               );
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Measure.propTypes = {
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	measure: PropTypes.arrayOf(PropTypes.object),
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               };
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               export default Measure;
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+
 	var defaultStyles = {
 		display: 'inline-block'
 	};
@@ -23704,26 +23750,61 @@
 		marginTop: '25px'
 	};
 
-	var Measure = exports.Measure = function Measure(_ref) {
-		var _ref$measure = _ref.measure,
-		    measure = _ref$measure === undefined ? [{
-			treble: '',
-			bass: ''
-		}] : _ref$measure;
-		return _react2.default.createElement(
-			'div',
-			(0, _glamor.css)(defaultStyles),
-			measure.map(function (object, i) {
+	var Measure = function (_Component) {
+		_inherits(Measure, _Component);
+
+		function Measure() {
+			_classCallCheck(this, Measure);
+
+			return _possibleConstructorReturn(this, (Measure.__proto__ || Object.getPrototypeOf(Measure)).apply(this, arguments));
+		}
+
+		_createClass(Measure, [{
+			key: 'sizeMeasure',
+			value: function sizeMeasure(prop) {
+				var m = prop;
+				var width = m.treble.length >= m.bass.length ? m.treble.length : m.bass.length;
+
+				if (!width) {
+					width = 1;
+				}
+
+				m.styles = {
+					width: width * 15 + 'px'
+				};
+				return m;
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var _this2 = this;
+
+				var _props$measure = this.props.measure,
+				    measure = _props$measure === undefined ? [{ treble: '', bass: '' }] : _props$measure;
+
+
+				measure.map(function (el) {
+					return _this2.sizeMeasure(el);
+				});
+
 				return _react2.default.createElement(
 					'div',
-					_extends({ key: i }, (0, _glamor.css)(defaultStyles)),
-					_react2.default.createElement(_Staff.Staff, { data: object.treble }),
-					_react2.default.createElement(_Staff.Staff, { styles: bottomStyles, data: object.bass })
+					_extends({ className: 'Measure' }, (0, _glamor.css)(defaultStyles)),
+					measure.map(function (el, i) {
+						return _react2.default.createElement(
+							'div',
+							_extends({ key: i, className: 'MeasureMap' }, (0, _glamor.css)(Object.assign({}, el.styles, defaultStyles))),
+							_react2.default.createElement(_Staff.Staff, { data: el.treble }),
+							_react2.default.createElement(_Staff.Staff, { styles: bottomStyles, data: el.bass })
+						);
+					}),
+					_react2.default.createElement(_BarLine.BarLine, null)
 				);
-			}),
-			_react2.default.createElement(_BarLine.BarLine, null)
-		);
-	};
+			}
+		}]);
+
+		return Measure;
+	}(_react.Component);
 
 	Measure.propTypes = {
 		measure: _react.PropTypes.arrayOf(_react.PropTypes.object)
@@ -23778,6 +23859,15 @@
 		return _react2.default.createElement(
 			'div',
 			(0, _glamor.css)(Object.assign({}, styles, defaultStyles)),
+			data.length ? null : _react2.default.createElement(
+				'div',
+				(0, _glamor.css)(noteStyles),
+				_react2.default.createElement(_Bar.Bar, null),
+				_react2.default.createElement(_Bar.Bar, null),
+				_react2.default.createElement(_Bar.Bar, null),
+				_react2.default.createElement(_Bar.Bar, null),
+				_react2.default.createElement(_Bar.Bar, null)
+			),
 			data.map(function (el, i) {
 				return _react2.default.createElement(
 					'div',
@@ -23821,9 +23911,9 @@
 
 	var styles = {
 		borderBottom: '1px solid black',
-		width: '15px',
 		display: 'block',
-		height: '10px'
+		height: '10px',
+		widht: '15px'
 	};
 
 	var Bar = exports.Bar = function Bar() {
@@ -23923,7 +24013,7 @@
 	var defaultStyles = {
 		display: 'inline-block',
 		borderRight: '1px solid black',
-		height: '125px'
+		height: '129px'
 	};
 
 	var BarLine = exports.BarLine = function BarLine() {
