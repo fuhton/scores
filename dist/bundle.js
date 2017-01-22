@@ -59,8 +59,12 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	window.addEventListener('load', function () {
-		(0, _reactDom.render)(_react2.default.createElement(_App2.default, null), document.querySelector('#demo'));
+	  (0, _reactDom.render)(_react2.default.createElement(_App2.default, null), document.querySelector('#demo'));
 	});
+
+	/**
+	 * Load in redux and trigger a buffer call on click
+	 */
 
 /***/ },
 /* 1 */
@@ -23705,42 +23709,7 @@
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* import React, { PropTypes } from 'react';
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               import { css } from 'glamor';
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               import { Staff } from './Staff';
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               import { BarLine } from './BarLine';
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               const defaultStyles = {
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	display: 'inline-block',
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               };
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               const bottomStyles = {
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	marginTop: '25px',
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               };
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               export const Measure = ({
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	measure = [{
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		treble: '',
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		bass: '',
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	}],
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               }) => (
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	<div {...css(defaultStyles)}>
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		{measure.map((object, i) =>
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               			<div key={i} {...css(defaultStyles)}>
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               				<Staff data={object.treble} />
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               				<Staff styles={bottomStyles} data={object.bass} />
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               			</div>,
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		)}
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               		<BarLine />
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	</div>
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               );
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Measure.propTypes = {
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	measure: PropTypes.arrayOf(PropTypes.object),
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               };
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               export default Measure;
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var defaultStyles = {
 		display: 'inline-block'
@@ -23794,8 +23763,8 @@
 						return _react2.default.createElement(
 							'div',
 							_extends({ key: i, className: 'MeasureMap' }, (0, _glamor.css)(Object.assign({}, el.styles, defaultStyles))),
-							_react2.default.createElement(_Staff.Staff, { data: el.treble }),
-							_react2.default.createElement(_Staff.Staff, { styles: bottomStyles, data: el.bass })
+							_react2.default.createElement(_Staff.Staff, { type: 'treble', data: el.treble }),
+							_react2.default.createElement(_Staff.Staff, { type: 'bass', styles: bottomStyles, data: el.bass })
 						);
 					}),
 					_react2.default.createElement(_BarLine.BarLine, null)
@@ -23852,7 +23821,9 @@
 	// Staff is equal to ONE duration. Notes should have their duration value
 	// checked, and if they exceed ONE duration, stop mapping
 	var Staff = exports.Staff = function Staff(_ref) {
-		var _ref$styles = _ref.styles,
+		var _ref$type = _ref.type,
+		    type = _ref$type === undefined ? 'treble' : _ref$type,
+		    _ref$styles = _ref.styles,
 		    styles = _ref$styles === undefined ? {} : _ref$styles,
 		    _ref$data = _ref.data,
 		    data = _ref$data === undefined ? {} : _ref$data;
@@ -23877,13 +23848,14 @@
 					_react2.default.createElement(_Bar.Bar, null),
 					_react2.default.createElement(_Bar.Bar, null),
 					_react2.default.createElement(_Bar.Bar, null),
-					_react2.default.createElement(_Note.Note, { note: el.note })
+					_react2.default.createElement(_Note.Note, { type: type, note: el.note })
 				);
 			})
 		);
 	};
 
 	Staff.propTypes = {
+		type: _react.PropTypes.string.isRequired,
 		styles: _react.PropTypes.object,
 		data: _react.PropTypes.arrayOf(_react.PropTypes.object)
 	};
@@ -23955,14 +23927,17 @@
 
 	var Note = exports.Note = function Note(_ref) {
 		var _ref$note = _ref.note,
-		    note = _ref$note === undefined ? '' : _ref$note;
+		    note = _ref$note === undefined ? '' : _ref$note,
+		    _ref$type = _ref.type,
+		    type = _ref$type === undefined ? 'treble' : _ref$type;
 
-		styles.top = _notes.Treble[note];
+		styles.top = type === 'treble' ? 59 - _notes.notes[note] * 5.5 + 'px' : -5.5 - _notes.notes[note] * 5.5 + 'px';
 		return _react2.default.createElement('div', (0, _glamor.css)(styles));
 	};
 
 	Note.propTypes = {
-		note: _react.PropTypes.string.isRequired
+		note: _react.PropTypes.string.isRequired,
+		type: _react.PropTypes.string.isRequired
 	};
 
 	exports.default = Note;
@@ -23971,23 +23946,60 @@
 /* 193 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	var Treble = exports.Treble = {
-		g5: '-55px',
-		f5: '-49.5px',
-		e5: '-44px',
-		d5: '20.5px',
-		c5: '24.5px',
-		b5: '28.5px',
-		a5: '32.5px',
-		g4: '38.5px'
+	var notes = exports.notes = {
+		c8: 21,
+		b7: 20,
+		a7: 19,
+		g6: 18,
+		f6: 17,
+		e6: 16,
+		d6: 15,
+		c6: 14,
+		b5: 13,
+		a5: 12,
+		g5: 11,
+		f5: 10,
+		e5: 9,
+		d5: 8,
+		c5: 7,
+		b4: 6,
+		a4: 5,
+		g4: 4,
+		f4: 3,
+		e4: 2,
+		d4: 1,
+		c4: 0,
+		b3: -1,
+		a3: -2,
+		g3: -3,
+		f3: -4,
+		e3: -5,
+		d3: -6,
+		c3: -7,
+		b2: -8,
+		a2: -9,
+		g2: -10,
+		f2: -11,
+		e2: -12,
+		d2: -13,
+		c2: -14,
+		b1: -15,
+		a1: -16,
+		g1: -17,
+		f1: -18,
+		e1: -19,
+		d1: -20,
+		c1: -21,
+		b0: -22,
+		a0: -23
 	};
 
-	exports.default = Treble;
+	exports.default = notes;
 
 /***/ },
 /* 194 */
@@ -24037,11 +24049,11 @@
 							"duration": "1"
 						},
 						{
-							"note": "a5",
+							"note": "a4",
 							"duration": "1"
 						},
 						{
-							"note": "b5",
+							"note": "b4",
 							"duration": "1"
 						},
 						{
@@ -24051,7 +24063,7 @@
 					],
 					"bass": [
 						{
-							"note": "g2",
+							"note": "g3",
 							"duration": "1"
 						},
 						{
@@ -24063,7 +24075,7 @@
 							"duration": "1"
 						},
 						{
-							"note": "c3",
+							"note": "c4",
 							"duration": "1"
 						}
 					]

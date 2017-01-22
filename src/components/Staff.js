@@ -18,6 +18,7 @@ const noteStyles = {
 // Staff is equal to ONE duration. Notes should have their duration value
 // checked, and if they exceed ONE duration, stop mapping
 export const Staff = ({
+	type = 'treble',
 	styles = {},
 	data = {},
 }) => (
@@ -38,13 +39,14 @@ export const Staff = ({
 				<Bar />
 				<Bar />
 				<Bar />
-				<Note note={el.note} />
+				<Note type={type} note={el.note} />
 			</div>
 		))}
 	</div>
 );
 
 Staff.propTypes = {
+	type: PropTypes.string.isRequired,
 	styles: PropTypes.object,
 	data: PropTypes.arrayOf(PropTypes.object),
 };

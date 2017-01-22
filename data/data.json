@@ -9,11 +9,11 @@
 						"duration": "1"
 					},
 					{
-						"note": "a5",
+						"note": "a4",
 						"duration": "1"
 					},
 					{
-						"note": "b5",
+						"note": "b4",
 						"duration": "1"
 					},
 					{
@@ -23,7 +23,7 @@
 				],
 				"bass": [
 					{
-						"note": "g2",
+						"note": "g3",
 						"duration": "1"
 					},
 					{
@@ -35,7 +35,7 @@
 						"duration": "1"
 					},
 					{
-						"note": "c3",
+						"note": "c4",
 						"duration": "1"
 					}
 				]

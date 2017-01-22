@@ -1,40 +1,3 @@
-/* import React, { PropTypes } from 'react';
-import { css } from 'glamor';
-import { Staff } from './Staff';
-import { BarLine } from './BarLine';
-
-const defaultStyles = {
-	display: 'inline-block',
-};
-
-const bottomStyles = {
-	marginTop: '25px',
-};
-
-export const Measure = ({
-	measure = [{
-		treble: '',
-		bass: '',
-	}],
-}) => (
-	<div {...css(defaultStyles)}>
-		{measure.map((object, i) =>
-			<div key={i} {...css(defaultStyles)}>
-				<Staff data={object.treble} />
-				<Staff styles={bottomStyles} data={object.bass} />
-			</div>,
-		)}
-		<BarLine />
-	</div>
-);
-
-Measure.propTypes = {
-	measure: PropTypes.arrayOf(PropTypes.object),
-};
-
-export default Measure;
-*/
-
 import React, { PropTypes, Component } from 'react';
 import { css } from 'glamor';
 import { Staff } from './Staff';
@@ -73,8 +36,8 @@ class Measure extends Component {
 			<div className="Measure" {...css(defaultStyles)}>
 				{measure.map((el, i) =>
 					<div key={i} className="MeasureMap" {...css(Object.assign({}, el.styles, defaultStyles))}>
-						<Staff data={el.treble} />
-						<Staff styles={bottomStyles} data={el.bass} />
+						<Staff type="treble" data={el.treble} />
+						<Staff type="bass" styles={bottomStyles} data={el.bass} />
 					</div>,
 				)}
 				<BarLine />
