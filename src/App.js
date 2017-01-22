@@ -1,6 +1,6 @@
 import React from 'react';
-import Score from '../../lib/components/Score';
-import data from '../data.json';
+import Score from './components/Score';
+import data from '../data/data.json';
 
 const styles = {
 	margin: '0 auto',

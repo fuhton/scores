@@ -1,7 +1,7 @@
 import path from 'path';
 
 module.exports = {
-	entry: './examples/js/index.js',
+	entry: './src/index.js',
 	output: {
 		filename: 'dist/bundle.js'
 	},
