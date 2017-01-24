@@ -4,10 +4,6 @@ import { Bar } from './Bar';
 import { Note } from './Note';
 
 const defaultStyles = {};
-/*
-	display: 'inline-block',
-	position: 'relative',
-};*/
 
 const noteStyles = {
 	display: 'inline-block',
