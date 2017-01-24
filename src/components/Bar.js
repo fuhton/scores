@@ -5,7 +5,6 @@ const styles = {
 	borderBottom: '1px solid black',
 	display: 'block',
 	height: '10px',
-	widht: '15px',
 };
 
 export const Bar = () => (

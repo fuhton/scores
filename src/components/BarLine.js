@@ -4,11 +4,11 @@ import { css } from 'glamor';
 const defaultStyles = {
 	display: 'inline-block',
 	borderRight: '1px solid black',
-	height: '129px',
+	height: '125px',
 };
 
 export const BarLine = () => (
-	<div className="measureEnd" {...css(defaultStyles)} />
+	<div className="barLine" {...css(defaultStyles)} />
 );
 
 export default BarLine;
