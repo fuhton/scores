@@ -4,7 +4,7 @@ import { css } from 'glamor';
 const defaultStyles = {
 	display: 'inline-block',
 	borderRight: '1px solid black',
-	height: '125px',
+	height: '129px',
 };
 
 export const BarLine = () => (

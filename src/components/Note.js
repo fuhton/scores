@@ -20,7 +20,7 @@ export const Note = ({
 	`${59 - ((notes[note]) * 5.5)}px` :
 	`${-5.5 - (notes[note] * 5.5)}px`;
 	return (
-		<div {...css(styles)} />
+		<div className="note" {...css(styles)} />
 	);
 };
 

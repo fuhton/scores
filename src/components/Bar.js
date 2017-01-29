@@ -8,7 +8,7 @@ const styles = {
 };
 
 export const Bar = () => (
-	<div {...css(styles)} />
+	<div className="Bar" {...css(styles)} />
 );
 
 export default Bar;
