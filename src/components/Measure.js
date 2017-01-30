@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { css } from 'glamor';
 import { TrebleStaff } from './TrebleStaff';
 import { BassStaff } from './BassStaff';
-import { Note } from './Note';
+import DynamicNote from '../containers/DynamicNote';
 import { BarLine } from './BarLine';
 
 const defaultStyles = {
@@ -28,35 +28,29 @@ const size = (prop) => {
 
 export const Measure = ({
 	measure = [{ treble: '', bass: '' }],
-}) => {
-	console.log('hey');
-	return (
-		<div className="Measure" {...css(defaultStyles)}>
-			{measure.map((el, i) => (
-				<div key={i} className="MeasureMap" {...css(Object.assign({}, el.styles, defaultStyles))}>
-					{[...Array(size(el))].map((_, j) => {
-						console.log('hye');
-						return (
-							<div key={j} {...css(defaultStyles)}>
-								<TrebleStaff>
-									{typeof el.treble[j] === 'undefined' ? null :
-										<Note type="treble" note={el.treble[j].note} />
-									}
-								</TrebleStaff>
-								<BassStaff>
-									{typeof el.bass[j] === 'undefined' ? null :
-										<Note type="bass" note={el.bass[j].note} />
-									}
-								</BassStaff>
-							</div>
-						);
-					})}
-				</div>
-			))}
-			<BarLine />
-		</div>
-	);
-};
+}) => (
+	<div className="Measure" {...css(defaultStyles)}>
+		{measure.map((el, i) => (
+			<div key={i} className="MeasureMap" {...css(Object.assign({}, el.styles, defaultStyles))}>
+				{[...Array(size(el))].map((_, j) => (
+					<div key={j} {...css(defaultStyles)}>
+						<TrebleStaff>
+							{typeof el.treble[j] === 'undefined' ? null :
+								<DynamicNote type="treble" note={el.treble[j].note} />
+							}
+						</TrebleStaff>
+						<BassStaff>
+							{typeof el.bass[j] === 'undefined' ? null :
+								<DynamicNote type="bass" note={el.bass[j].note} />
+							}
+						</BassStaff>
+					</div>
+				))}
+			</div>
+		))}
+		<BarLine />
+	</div>
+);
 
 Measure.propTypes = {
 	measure: PropTypes.arrayOf(PropTypes.object),

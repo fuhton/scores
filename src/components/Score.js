@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { css } from 'glamor';
-import Measure from './Measure';
+import { Measure } from './Measure';
 import { BarLine } from './BarLine';
 
 const defaultStyles = {
