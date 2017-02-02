@@ -8,7 +8,7 @@ import {
 } from '../actions';
 import Score from '../components/Score';
 import data from '../../data/data.json';
-import Sound from '../audio/Sound';
+import { Sound } from '../audio/Sound';
 import { frequency } from '../constants/frequency';
 
 const styles = {
