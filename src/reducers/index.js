@@ -1,9 +1,19 @@
 import { combineReducers } from 'redux';
 import {
 	PLAY_NOTE,
-	SET_NOTE_VALUE,
 	SET_BEAT_VALUE,
+	SET_NOTE_VALUE,
+	SET_SOUNDS,
 } from '../constants';
+
+const sounds = (state = [], action) => {
+	switch (action.type) {
+		case SET_SOUNDS:
+			return action.sounds;
+		default:
+			return state;
+	}
+};
 
 const playNote = (state = 'c4', action) => {
 	switch (action.type) {
@@ -14,7 +24,7 @@ const playNote = (state = 'c4', action) => {
 	}
 };
 
-const setNoteValue = (state = '4', action) => {
+const noteValue = (state = '4', action) => {
 	switch (action.type) {
 		case SET_NOTE_VALUE:
 			return action.noteValue;
@@ -23,7 +33,7 @@ const setNoteValue = (state = '4', action) => {
 	}
 };
 
-const setBeatValue = (state = '4', action) => {
+const beatValue = (state = '4', action) => {
 	switch (action.type) {
 		case SET_BEAT_VALUE:
 			return action.beatValue;
@@ -35,8 +45,9 @@ const setBeatValue = (state = '4', action) => {
 
 const rootReducer = combineReducers({
 	playNote,
-	setNoteValue,
-	setBeatValue,
+	beatValue,
+	noteValue,
+	sounds,
 });
 
 export default rootReducer;

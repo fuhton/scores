@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { playNote } from '../actions';
+import { triggerPlayNote } from '../actions';
 import { notes } from '../constants/notes';
 import { Note } from '../components/Note';
 
@@ -15,7 +15,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	onClick: () => {
-		dispatch(playNote(ownProps.note));
+		dispatch(triggerPlayNote(ownProps.note));
 	},
 });
 
