@@ -44506,7 +44506,23 @@
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 	var defaultStyles = {
-		display: 'inline-block'
+		display: 'inline-block',
+		position: 'relative',
+		':hover': {
+			cursor: 'pointer',
+			'& .MeasureState': {
+				background: 'oldlace'
+			}
+		}
+	};
+
+	var stateStyles = {
+		position: 'absolute',
+		right: '-3px',
+		left: '-3px',
+		top: '5px',
+		bottom: '-1px',
+		borderRadius: '5px'
 	};
 
 	var size = function size(prop) {
@@ -44518,20 +44534,13 @@
 		return width;
 	};
 
-	/* const sizeMeasure = (prop) => {
-		const m = prop;
-		m.styles = {
-			width: `${size(prop) * 15}px`,
-		};
-		return m;
-	};*/
-
 	var Measure = exports.Measure = function Measure(_ref) {
 		var _ref$measure = _ref.measure,
 		    measure = _ref$measure === undefined ? [{ treble: '', bass: '' }] : _ref$measure;
 		return _react2.default.createElement(
 			'div',
 			_extends({ className: 'Measure' }, (0, _glamor.css)(defaultStyles)),
+			_react2.default.createElement('div', _extends({ className: 'MeasureState' }, (0, _glamor.css)(stateStyles))),
 			measure.map(function (el, i) {
 				return _react2.default.createElement(
 					'div',

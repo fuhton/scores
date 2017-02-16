@@ -7,6 +7,22 @@ import { BarLine } from './BarLine';
 
 const defaultStyles = {
 	display: 'inline-block',
+	position: 'relative',
+	':hover': {
+		cursor: 'pointer',
+		'& .MeasureState': {
+			background: 'oldlace',
+		},
+	},
+};
+
+const stateStyles = {
+	position: 'absolute',
+	right: '-3px',
+	left: '-3px',
+	top: '5px',
+	bottom: '-1px',
+	borderRadius: '5px',
 };
 
 const size = (prop) => {
@@ -18,18 +34,11 @@ const size = (prop) => {
 	return width;
 };
 
-/* const sizeMeasure = (prop) => {
-	const m = prop;
-	m.styles = {
-		width: `${size(prop) * 15}px`,
-	};
-	return m;
-};*/
-
 export const Measure = ({
 	measure = [{ treble: '', bass: '' }],
 }) => (
 	<div className="Measure" {...css(defaultStyles)}>
+		<div className="MeasureState" {...css(stateStyles)} />
 		{measure.map((el, i) => (
 			<div key={i} className="MeasureMap" {...css(Object.assign({}, el.styles, defaultStyles))}>
 				{[...Array(size(el))].map((_, j) => (
