@@ -24917,6 +24917,8 @@
 
 	var _constants = __webpack_require__(234);
 
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 	var sounds = function sounds() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 		var action = arguments[1];
@@ -24924,6 +24926,20 @@
 		switch (action.type) {
 			case _constants.SET_SOUNDS:
 				return action.sounds;
+			default:
+				return state;
+		}
+	};
+
+	var measures = function measures() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+		var action = arguments[1];
+
+		switch (action.type) {
+			case _constants.SET_MEASURES:
+				return action.measures;
+			case _constants.ADD_MEASURE:
+				return [].concat(_toConsumableArray(state), [action.measures]);
 			default:
 				return state;
 		}
@@ -24966,9 +24982,10 @@
 	};
 
 	var rootReducer = (0, _redux.combineReducers)({
-		playNote: playNote,
 		beatValue: beatValue,
+		measures: measures,
 		noteValue: noteValue,
+		playNote: playNote,
 		sounds: sounds
 	});
 
@@ -24985,10 +25002,16 @@
 	});
 	var SET_NOTE_VALUE = exports.SET_NOTE_VALUE = 'SET_NOTE_VALUE';
 	var SET_BEAT_VALUE = exports.SET_BEAT_VALUE = 'SET_BEATS';
+	var SET_MEASURES = exports.SET_MEASURES = 'SET_MEASURES';
 	var SET_SOUNDS = exports.SET_SOUNDS = 'SET_SOUNDS';
 	var START_NOTE = exports.START_NOTE = 'START_NOTE';
 	var PLAY_NOTE = exports.PLAY_NOTE = 'PLAY_NOTE';
 	var END_NOTE = exports.END_NOTE = 'END_NOTE';
+
+	// Toolbar
+	var ADD_NOTE = exports.ADD_NOTE = 'ADD_NOTE';
+	var ADD_MEASURE = exports.ADD_MEASURE = 'ADD_MEASURE';
+	var DELETE_MEASURE = exports.DELETE_MEASURE = 'DELETE_MEASURE';
 
 /***/ },
 /* 235 */
@@ -25018,13 +25041,13 @@
 
 	var _Score2 = _interopRequireDefault(_Score);
 
-	var _data = __webpack_require__(257);
+	var _data = __webpack_require__(261);
 
 	var _data2 = _interopRequireDefault(_data);
 
-	var _Sound = __webpack_require__(258);
+	var _Sound = __webpack_require__(262);
 
-	var _frequency = __webpack_require__(259);
+	var _frequency = __webpack_require__(263);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25057,6 +25080,8 @@
 				if (!_data2.default) {
 					return;
 				}
+
+				dispatch((0, _actions.setMeasures)(_data2.default.measures));
 				dispatch((0, _actions.setNoteValue)(_data2.default.note));
 				dispatch((0, _actions.setBeatValue)(_data2.default.beat));
 				_lodash2.default.each(_frequency.frequency, function (el, i) {
@@ -25067,10 +25092,13 @@
 		}, {
 			key: 'render',
 			value: function render() {
+				var result = this.props.result;
+
+
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_Score2.default, { styles: styles, data: _data2.default })
+					_react2.default.createElement(_Score2.default, { styles: styles, data: result })
 				);
 			}
 		}]);
@@ -25079,14 +25107,14 @@
 	}(_react.Component);
 
 	var mapStateToProps = function mapStateToProps(state) {
-		var foo = state.foo;
+		var result = Object.assign({}, _data2.default, state);
 
-
-		return { foo: foo };
+		return { result: result };
 	};
 
 	AppContainer.propTypes = {
-		dispatch: _react.PropTypes.func
+		dispatch: _react.PropTypes.func,
+		result: _react.PropTypes.object.isRequired
 	};
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(AppContainer);
@@ -42172,7 +42200,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.triggerPlayNote = exports.setBeatValue = exports.setNoteValue = exports.endNote = exports.startNote = exports.setSounds = undefined;
+	exports.triggerPlayNote = exports.setBeatValue = exports.setMeasures = exports.setNoteValue = exports.endNote = exports.startNote = exports.setSounds = undefined;
 
 	var _lodash = __webpack_require__(236);
 
@@ -42207,6 +42235,13 @@
 		return {
 			type: _constants.SET_NOTE_VALUE,
 			noteValue: noteValue
+		};
+	};
+
+	var setMeasures = exports.setMeasures = function setMeasures(measures) {
+		return {
+			type: _constants.SET_MEASURES,
+			measures: measures
 		};
 	};
 
@@ -42249,9 +42284,11 @@
 
 	var _glamor = __webpack_require__(239);
 
-	var _Measure = __webpack_require__(248);
+	var _BarLine = __webpack_require__(248);
 
-	var _BarLine = __webpack_require__(256);
+	var _Measure = __webpack_require__(249);
+
+	var _Toolbar = __webpack_require__(257);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42268,11 +42305,16 @@
 		    data = _ref$data === undefined ? {} : _ref$data;
 		return _react2.default.createElement(
 			'div',
-			_extends({ className: 'Score' }, (0, _glamor.css)(Object.assign({}, styles, defaultStyles))),
-			_react2.default.createElement(_BarLine.BarLine, null),
-			data.measures.map(function (object, i) {
-				return _react2.default.createElement(_Measure.Measure, { key: i, measure: object });
-			})
+			null,
+			_react2.default.createElement(_Toolbar.Toolbar, null),
+			_react2.default.createElement(
+				'div',
+				_extends({ className: 'Score' }, (0, _glamor.css)(Object.assign({}, styles, defaultStyles))),
+				_react2.default.createElement(_BarLine.BarLine, null),
+				data.measures.map(function (object, i) {
+					return _react2.default.createElement(_Measure.Measure, { key: i, measure: object });
+				})
+			)
 		);
 	};
 
@@ -44406,6 +44448,39 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	exports.BarLine = undefined;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _glamor = __webpack_require__(239);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var defaultStyles = {
+		display: 'inline-block',
+		borderRight: '1px solid black',
+		height: '129px'
+	};
+
+	var BarLine = exports.BarLine = function BarLine() {
+		return _react2.default.createElement('div', _extends({ className: 'barLine' }, (0, _glamor.css)(defaultStyles)));
+	};
+
+	exports.default = BarLine;
+
+/***/ },
+/* 249 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	exports.Measure = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -44416,15 +44491,15 @@
 
 	var _glamor = __webpack_require__(239);
 
-	var _TrebleStaff = __webpack_require__(249);
+	var _TrebleStaff = __webpack_require__(250);
 
-	var _BassStaff = __webpack_require__(252);
+	var _BassStaff = __webpack_require__(253);
 
-	var _DynamicNote = __webpack_require__(253);
+	var _DynamicNote = __webpack_require__(254);
 
 	var _DynamicNote2 = _interopRequireDefault(_DynamicNote);
 
-	var _BarLine = __webpack_require__(256);
+	var _BarLine = __webpack_require__(248);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44490,7 +44565,7 @@
 	exports.default = Measure;
 
 /***/ },
-/* 249 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44508,7 +44583,7 @@
 
 	var _glamor = __webpack_require__(239);
 
-	var _Staff = __webpack_require__(250);
+	var _Staff = __webpack_require__(251);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44541,7 +44616,7 @@
 	exports.default = TrebleStaff;
 
 /***/ },
-/* 250 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44559,7 +44634,7 @@
 
 	var _glamor = __webpack_require__(239);
 
-	var _Bar = __webpack_require__(251);
+	var _Bar = __webpack_require__(252);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44595,7 +44670,7 @@
 	exports.default = Staff;
 
 /***/ },
-/* 251 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44628,7 +44703,7 @@
 	exports.default = Bar;
 
 /***/ },
-/* 252 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44646,7 +44721,7 @@
 
 	var _glamor = __webpack_require__(239);
 
-	var _Staff = __webpack_require__(250);
+	var _Staff = __webpack_require__(251);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44680,7 +44755,7 @@
 	exports.default = BassStaff;
 
 /***/ },
-/* 253 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44693,9 +44768,9 @@
 
 	var _actions = __webpack_require__(237);
 
-	var _notes = __webpack_require__(254);
+	var _notes = __webpack_require__(255);
 
-	var _Note = __webpack_require__(255);
+	var _Note = __webpack_require__(256);
 
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
 		var note = ownProps.note,
@@ -44722,7 +44797,7 @@
 	exports.default = DynamicNote;
 
 /***/ },
-/* 254 */
+/* 255 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -44781,7 +44856,7 @@
 	exports.default = notes;
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44826,7 +44901,7 @@
 	exports.default = Note;
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44834,7 +44909,108 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.BarLine = undefined;
+	exports.Toolbar = undefined;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _glamor = __webpack_require__(239);
+
+	var _AddMeasure = __webpack_require__(258);
+
+	var _AddMeasure2 = _interopRequireDefault(_AddMeasure);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var defaultStyles = {
+		height: '40px',
+		width: '200px'
+	};
+
+	var Toolbar = exports.Toolbar = function Toolbar() {
+		return _react2.default.createElement(
+			'div',
+			_extends({ className: 'toolbar' }, (0, _glamor.css)(defaultStyles)),
+			_react2.default.createElement(_AddMeasure2.default, null)
+		);
+	};
+
+	exports.default = Toolbar;
+
+/***/ },
+/* 258 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _reactRedux = __webpack_require__(199);
+
+	var _toolbar = __webpack_require__(259);
+
+	var _ToolbarButton = __webpack_require__(260);
+
+	var mapStateToProps = function mapStateToProps() {
+		return {
+			text: 'Add Measure'
+		};
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+		return {
+			onClick: function onClick() {
+				dispatch((0, _toolbar.addMeasure)([{ treble: [], bass: [] }, { treble: [], bass: [] }]));
+			}
+		};
+	};
+
+	var AddMeasure = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ToolbarButton.ToolbarButton);
+
+	exports.default = AddMeasure;
+
+/***/ },
+/* 259 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.removeMeasure = exports.addMeasure = undefined;
+
+	var _constants = __webpack_require__(234);
+
+	var addMeasure = exports.addMeasure = function addMeasure(measures) {
+		return {
+			type: _constants.ADD_MEASURE,
+			measures: measures
+		};
+	};
+
+	var removeMeasure = exports.removeMeasure = function removeMeasure(measures) {
+		return {
+			type: _constants.DELETE_MEASURE,
+			measures: measures
+		};
+	};
+
+/***/ },
+/* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.ToolbarButton = undefined;
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -44847,19 +45023,34 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var defaultStyles = {
-		display: 'inline-block',
-		borderRight: '1px solid black',
-		height: '129px'
+		height: '100%',
+		display: 'block',
+		':hover': {
+			cursor: 'pointer',
+			background: 'lightgray'
+		}
 	};
 
-	var BarLine = exports.BarLine = function BarLine() {
-		return _react2.default.createElement('div', _extends({ className: 'barLine' }, (0, _glamor.css)(defaultStyles)));
+	var ToolbarButton = exports.ToolbarButton = function ToolbarButton(_ref) {
+		var onClick = _ref.onClick,
+		    _ref$text = _ref.text,
+		    text = _ref$text === undefined ? '' : _ref$text;
+		return _react2.default.createElement(
+			'button',
+			_extends({ className: 'toolbarButton', onClick: onClick }, (0, _glamor.css)(defaultStyles)),
+			text
+		);
 	};
 
-	exports.default = BarLine;
+	ToolbarButton.propTypes = {
+		onClick: _react.PropTypes.func,
+		text: _react.PropTypes.string
+	};
+
+	exports.default = ToolbarButton;
 
 /***/ },
-/* 257 */
+/* 261 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -44929,7 +45120,7 @@
 	};
 
 /***/ },
-/* 258 */
+/* 262 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -44973,7 +45164,7 @@
 	exports.default = Sound;
 
 /***/ },
-/* 259 */
+/* 263 */
 /***/ function(module, exports) {
 
 	"use strict";

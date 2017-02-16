@@ -2,6 +2,7 @@ import _ from 'lodash';
 import {
 	END_NOTE,
 	SET_BEAT_VALUE,
+	SET_MEASURES,
 	SET_NOTE_VALUE,
 	SET_SOUNDS,
 	START_NOTE,
@@ -25,6 +26,11 @@ export const endNote = note => ({
 export const setNoteValue = noteValue => ({
 	type: SET_NOTE_VALUE,
 	noteValue,
+});
+
+export const setMeasures = measures => ({
+	type: SET_MEASURES,
+	measures,
 });
 
 export const setBeatValue = beatValue => ({

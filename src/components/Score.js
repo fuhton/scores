@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { css } from 'glamor';
-import { Measure } from './Measure';
 import { BarLine } from './BarLine';
+import { Measure } from './Measure';
+import { Toolbar } from './Toolbar';
 
 const defaultStyles = {
 	display: 'block',
@@ -13,9 +14,12 @@ const Score = ({
 	styles = {},
 	data = {},
 }) => (
-	<div className="Score" {...css(Object.assign({}, styles, defaultStyles))}>
-		<BarLine />
-		{data.measures.map((object, i) => <Measure key={i} measure={object} />)}
+	<div>
+		<Toolbar />
+		<div className="Score" {...css(Object.assign({}, styles, defaultStyles))}>
+			<BarLine />
+			{data.measures.map((object, i) => <Measure key={i} measure={object} />)}
+		</div>
 	</div>
 );
 

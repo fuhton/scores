@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import {
 	setBeatValue,
+	setMeasures,
 	setNoteValue,
 	setSounds,
 } from '../actions';
@@ -24,6 +25,8 @@ class AppContainer extends Component {
 		if (!data) {
 			return;
 		}
+
+		dispatch(setMeasures(data.measures));
 		dispatch(setNoteValue(data.note));
 		dispatch(setBeatValue(data.beat));
 		_.each(frequency, (el, i) => {
@@ -33,22 +36,25 @@ class AppContainer extends Component {
 	}
 
 	render() {
+		const { result } = this.props;
+
 		return (
 			<div>
-				<Score styles={styles} data={data} />
+				<Score styles={styles} data={result} />
 			</div>
 		);
 	}
 }
 
 const mapStateToProps = (state) => {
-	const { foo } = state;
+	const result = Object.assign({}, data, state);
 
-	return { foo };
+	return { result };
 };
 
 AppContainer.propTypes = {
 	dispatch: PropTypes.func,
+	result: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps)(AppContainer);
