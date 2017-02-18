@@ -19,6 +19,10 @@
 						"duration": "1"
 					},
 					{
+						"note": "b4",
+						"duration": "1"
+					},
+					{
 						"note": "c5",
 						"duration": "1"
 					}
@@ -41,14 +45,6 @@
 						"duration": "1"
 					}
 				]
-			},
-			{
-				"treble": [],
-				"bass": []
-			},
-			{
-				"treble": [],
-				"bass": []
 			}
 		],
 		[

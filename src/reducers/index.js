@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import {
 	ADD_MEASURE,
-	PLAY_NOTE,
 	SET_BEAT_VALUE,
 	SET_MEASURES,
 	SET_NOTE_VALUE,
@@ -31,15 +30,6 @@ const measures = (state = [], action) => {
 	}
 };
 
-const playNote = (state = 'c4', action) => {
-	switch (action.type) {
-		case PLAY_NOTE:
-			return action.note;
-		default:
-			return state;
-	}
-};
-
 const noteValue = (state = '4', action) => {
 	switch (action.type) {
 		case SET_NOTE_VALUE:
@@ -63,7 +53,6 @@ const rootReducer = combineReducers({
 	beatValue,
 	measures,
 	noteValue,
-	playNote,
 	sounds,
 });
 

@@ -18,11 +18,10 @@ const defaultStyles = {
 
 const stateStyles = {
 	position: 'absolute',
-	right: '-3px',
-	left: '-3px',
-	top: '5px',
-	bottom: '-1px',
-	borderRadius: '5px',
+	right: '1px',
+	left: '0',
+	top: '10px',
+	bottom: '4px',
 };
 
 const size = (prop) => {
