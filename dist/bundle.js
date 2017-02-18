@@ -24945,18 +24945,6 @@
 		}
 	};
 
-	var playNote = function playNote() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'c4';
-		var action = arguments[1];
-
-		switch (action.type) {
-			case _constants.PLAY_NOTE:
-				return action.note;
-			default:
-				return state;
-		}
-	};
-
 	var noteValue = function noteValue() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '4';
 		var action = arguments[1];
@@ -24985,7 +24973,6 @@
 		beatValue: beatValue,
 		measures: measures,
 		noteValue: noteValue,
-		playNote: playNote,
 		sounds: sounds
 	});
 
@@ -44518,11 +44505,10 @@
 
 	var stateStyles = {
 		position: 'absolute',
-		right: '-3px',
-		left: '-3px',
-		top: '5px',
-		bottom: '-1px',
-		borderRadius: '5px'
+		right: '1px',
+		left: '0',
+		top: '10px',
+		bottom: '4px'
 	};
 
 	var size = function size(prop) {
@@ -45083,6 +45069,10 @@
 							"duration": "1"
 						},
 						{
+							"note": "b4",
+							"duration": "1"
+						},
+						{
 							"note": "c5",
 							"duration": "1"
 						}
@@ -45105,14 +45095,6 @@
 							"duration": "1"
 						}
 					]
-				},
-				{
-					"treble": [],
-					"bass": []
-				},
-				{
-					"treble": [],
-					"bass": []
 				}
 			],
 			[
