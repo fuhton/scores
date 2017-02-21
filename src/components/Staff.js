@@ -3,9 +3,11 @@ import { css } from 'glamor';
 import { Bar } from './Bar';
 
 const defaultStyles = {
-	display: 'inline-block',
-	position: 'relative',
-	width: '15px',
+	Staff: {
+		display: 'inline-block',
+		position: 'relative',
+		width: '15px',
+	},
 };
 
 // Staff is equal to ONE duration. Notes should have their duration value
@@ -14,7 +16,7 @@ export const Staff = ({
 	styles = {},
 	children,
 }) => (
-	<div className="Staff" {...css(Object.assign({}, styles, defaultStyles))}>
+	<div className="Staff" {...css(Object.assign({}, defaultStyles.Staff, styles))}>
 		<Bar />
 		<Bar />
 		<Bar />

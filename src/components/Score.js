@@ -3,11 +3,14 @@ import { css } from 'glamor';
 import { BarLine } from './BarLine';
 import { Measure } from './Measure';
 import { Toolbar } from './Toolbar';
+import Signature from './Signature';
 
 const defaultStyles = {
-	display: 'block',
-	background: 'white',
-	backgroundColor: 'white',
+	Score: {
+		display: 'block',
+		background: 'white',
+		backgroundColor: 'white',
+	},
 };
 
 const Score = ({
@@ -16,8 +19,9 @@ const Score = ({
 }) => (
 	<div>
 		<Toolbar />
-		<div className="Score" {...css(Object.assign({}, styles, defaultStyles))}>
+		<div className="Score" {...css(Object.assign({}, defaultStyles.Score, styles))}>
 			<BarLine />
+			<Signature beat={data.beatValue} note={data.noteValue} />
 			{data.measures.map((object, i) => <Measure key={i} measure={object} />)}
 		</div>
 	</div>

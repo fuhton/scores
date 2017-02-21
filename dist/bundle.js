@@ -25028,13 +25028,13 @@
 
 	var _Score2 = _interopRequireDefault(_Score);
 
-	var _data = __webpack_require__(261);
+	var _data = __webpack_require__(262);
 
 	var _data2 = _interopRequireDefault(_data);
 
-	var _Sound = __webpack_require__(262);
+	var _Sound = __webpack_require__(263);
 
-	var _frequency = __webpack_require__(263);
+	var _frequency = __webpack_require__(264);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25044,7 +25044,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var styles = {
+	var defaultStyles = {
 		margin: '0 auto'
 	};
 
@@ -25071,6 +25071,7 @@
 				dispatch((0, _actions.setMeasures)(_data2.default.measures));
 				dispatch((0, _actions.setNoteValue)(_data2.default.note));
 				dispatch((0, _actions.setBeatValue)(_data2.default.beat));
+
 				_lodash2.default.each(_frequency.frequency, function (el, i) {
 					sounds[i] = new _Sound.Sound(el);
 				});
@@ -25085,7 +25086,7 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_Score2.default, { styles: styles, data: result })
+					_react2.default.createElement(_Score2.default, { styles: defaultStyles, data: result })
 				);
 			}
 		}]);
@@ -42277,12 +42278,18 @@
 
 	var _Toolbar = __webpack_require__(257);
 
+	var _Signature = __webpack_require__(261);
+
+	var _Signature2 = _interopRequireDefault(_Signature);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var defaultStyles = {
-		display: 'block',
-		background: 'white',
-		backgroundColor: 'white'
+		Score: {
+			display: 'block',
+			background: 'white',
+			backgroundColor: 'white'
+		}
 	};
 
 	var Score = function Score(_ref) {
@@ -42296,8 +42303,9 @@
 			_react2.default.createElement(_Toolbar.Toolbar, null),
 			_react2.default.createElement(
 				'div',
-				_extends({ className: 'Score' }, (0, _glamor.css)(Object.assign({}, styles, defaultStyles))),
+				_extends({ className: 'Score' }, (0, _glamor.css)(Object.assign({}, defaultStyles.Score, styles))),
 				_react2.default.createElement(_BarLine.BarLine, null),
+				_react2.default.createElement(_Signature2.default, { beat: data.beatValue, note: data.noteValue }),
 				data.measures.map(function (object, i) {
 					return _react2.default.createElement(_Measure.Measure, { key: i, measure: object });
 				})
@@ -44538,12 +44546,12 @@
 							_react2.default.createElement(
 								_TrebleStaff.TrebleStaff,
 								null,
-								typeof el.treble[j] === 'undefined' ? null : _react2.default.createElement(_DynamicNote2.default, { type: 'treble', note: el.treble[j].note })
+								typeof el.treble[j] === 'undefined' ? _react2.default.createElement('span', null) : _react2.default.createElement(_DynamicNote2.default, { type: 'treble', note: el.treble[j].note })
 							),
 							_react2.default.createElement(
 								_BassStaff.BassStaff,
 								null,
-								typeof el.bass[j] === 'undefined' ? null : _react2.default.createElement(_DynamicNote2.default, { type: 'bass', note: el.bass[j].note })
+								typeof el.bass[j] === 'undefined' ? _react2.default.createElement('span', null) : _react2.default.createElement(_DynamicNote2.default, { type: 'bass', note: el.bass[j].note })
 							)
 						);
 					})
@@ -44634,9 +44642,11 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var defaultStyles = {
-		display: 'inline-block',
-		position: 'relative',
-		width: '15px'
+		Staff: {
+			display: 'inline-block',
+			position: 'relative',
+			width: '15px'
+		}
 	};
 
 	// Staff is equal to ONE duration. Notes should have their duration value
@@ -44647,7 +44657,7 @@
 		    children = _ref.children;
 		return _react2.default.createElement(
 			'div',
-			_extends({ className: 'Staff' }, (0, _glamor.css)(Object.assign({}, styles, defaultStyles))),
+			_extends({ className: 'Staff' }, (0, _glamor.css)(Object.assign({}, defaultStyles.Staff, styles))),
 			_react2.default.createElement(_Bar.Bar, null),
 			_react2.default.createElement(_Bar.Bar, null),
 			_react2.default.createElement(_Bar.Bar, null),
@@ -44733,10 +44743,10 @@
 		    children = _ref.children;
 		return _react2.default.createElement(
 			'div',
-			_extends({ className: 'BassStaff' }, (0, _glamor.css)(Object.assign({}, styles, defaultStyles))),
+			_extends({ className: 'BassStaff' }, (0, _glamor.css)(Object.assign({}, defaultStyles, styles))),
 			_react2.default.createElement(
 				_Staff.Staff,
-				null,
+				{ styles: styles },
 				children
 			)
 		);
@@ -45046,6 +45056,121 @@
 
 /***/ },
 /* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _glamor = __webpack_require__(239);
+
+	var _BassStaff = __webpack_require__(253);
+
+	var _Staff = __webpack_require__(251);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var defaultStyles = {
+		Signature: {
+			display: 'inline-block',
+			position: 'relative'
+		},
+		SignatureContainer: {
+			display: 'block',
+			position: 'relative'
+		},
+		SignatureStaff: {
+			width: '30px'
+		},
+		SignatureChild: {
+			position: 'absolute',
+			left: '5px',
+			fontSize: '33px',
+			fontFamily: 'monospace'
+		},
+		Beat: {
+			top: '2px'
+		},
+		Note: {
+			top: '24px'
+		}
+	};
+
+	var Signature = function Signature(_ref) {
+		var _ref$beat = _ref.beat,
+		    beat = _ref$beat === undefined ? '4' : _ref$beat,
+		    _ref$note = _ref.note,
+		    note = _ref$note === undefined ? '4' : _ref$note,
+		    _ref$styles = _ref.styles,
+		    styles = _ref$styles === undefined ? {} : _ref$styles;
+		return _react2.default.createElement(
+			'div',
+			_extends({ className: 'Signature' }, (0, _glamor.css)(Object.assign({}, styles, defaultStyles.Signature))),
+			_react2.default.createElement(
+				'div',
+				_extends({ className: 'SignatureContainer' }, (0, _glamor.css)(defaultStyles.SignatureContainer)),
+				_react2.default.createElement(
+					_Staff.Staff,
+					{ styles: defaultStyles.SignatureStaff },
+					_react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'span',
+							_extends({ className: 'SignatureChild Beat' }, (0, _glamor.css)(Object.assign({}, defaultStyles.SignatureChild, defaultStyles.Beat))),
+							beat
+						),
+						_react2.default.createElement(
+							'span',
+							_extends({ className: 'SignatureChild Note' }, (0, _glamor.css)(Object.assign({}, defaultStyles.SignatureChild, defaultStyles.Note))),
+							note
+						)
+					)
+				)
+			),
+			_react2.default.createElement(
+				'div',
+				_extends({ className: 'SignatureContainer' }, (0, _glamor.css)(defaultStyles.SignatureContainer)),
+				_react2.default.createElement(
+					_BassStaff.BassStaff,
+					{ styles: defaultStyles.SignatureStaff },
+					_react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'span',
+							_extends({ className: 'SignatureChild Beat' }, (0, _glamor.css)(Object.assign({}, defaultStyles.SignatureChild, defaultStyles.Beat))),
+							beat
+						),
+						_react2.default.createElement(
+							'span',
+							_extends({ className: 'SignatureChild Note' }, (0, _glamor.css)(Object.assign({}, defaultStyles.SignatureChild, defaultStyles.Note))),
+							note
+						)
+					)
+				)
+			)
+		);
+	};
+
+	Signature.propTypes = {
+		beat: _react.PropTypes.string.isRequired,
+		note: _react.PropTypes.string.isRequired,
+		styles: _react.PropTypes.object
+	};
+
+	exports.default = Signature;
+
+/***/ },
+/* 262 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -45111,7 +45236,7 @@
 	};
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -45155,7 +45280,7 @@
 	exports.default = Sound;
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports) {
 
 	"use strict";

@@ -12,7 +12,7 @@ import data from '../../data/data.json';
 import { Sound } from '../audio/Sound';
 import { frequency } from '../constants/frequency';
 
-const styles = {
+const defaultStyles = {
 	margin: '0 auto',
 };
 
@@ -29,6 +29,7 @@ class AppContainer extends Component {
 		dispatch(setMeasures(data.measures));
 		dispatch(setNoteValue(data.note));
 		dispatch(setBeatValue(data.beat));
+
 		_.each(frequency, (el, i) => {
 			sounds[i] = new Sound(el);
 		});
@@ -40,7 +41,7 @@ class AppContainer extends Component {
 
 		return (
 			<div>
-				<Score styles={styles} data={result} />
+				<Score styles={defaultStyles} data={result} />
 			</div>
 		);
 	}

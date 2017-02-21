@@ -13,8 +13,8 @@ export const BassStaff = ({
 	styles = {},
 	children,
 }) => (
-	<div className="BassStaff" {...css(Object.assign({}, styles, defaultStyles))}>
-		<Staff>
+	<div className="BassStaff" {...css(Object.assign({}, defaultStyles, styles))}>
+		<Staff styles={styles}>
 			{children}
 		</Staff>
 	</div>

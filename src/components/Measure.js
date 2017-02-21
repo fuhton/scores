@@ -43,12 +43,12 @@ export const Measure = ({
 				{[...Array(size(el))].map((_, j) => (
 					<div key={j} {...css(defaultStyles)}>
 						<TrebleStaff>
-							{typeof el.treble[j] === 'undefined' ? null :
+							{typeof el.treble[j] === 'undefined' ? <span /> :
 								<DynamicNote type="treble" note={el.treble[j].note} />
 							}
 						</TrebleStaff>
 						<BassStaff>
-							{typeof el.bass[j] === 'undefined' ? null :
+							{typeof el.bass[j] === 'undefined' ? <span /> :
 								<DynamicNote type="bass" note={el.bass[j].note} />
 							}
 						</BassStaff>
